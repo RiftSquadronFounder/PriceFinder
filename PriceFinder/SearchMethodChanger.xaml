@@ -1,0 +1,37 @@
+﻿<Window x:Class="PriceFinder.SearchMethodChanger"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PriceFinder"
+        mc:Ignorable="d"
+        Title="SearchMethodChanger" Height="400" Width="350" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Border BorderThickness="2" BorderBrush="Gray">
+        
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"></RowDefinition>
+            <RowDefinition Height="0.15*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.15*"></RowDefinition>
+            <RowDefinition Height="0.15*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Выберите способ поиска" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1"></TextBlock>
+
+        <ListBox Grid.Row="2" Grid.Column="1">
+            <RadioButton GroupName="SearchType" Name="LinearRadioButton" VerticalContentAlignment="Center" Content="Линейный"></RadioButton>
+            <RadioButton GroupName="SearchType" Name="BinaryRadioButton" VerticalContentAlignment="Center" Content="Бинарный"></RadioButton>
+        </ListBox>
+
+        <Button Content="Подтвердить" Grid.Row="3" Grid.Column="1" Click="Accept"></Button>
+        <Button Content="X" Background="PaleVioletRed" Margin="5" Name="CloseWindow" FontSize="5" Padding="-5" Click="CloseWindow_Click"></Button>
+
+        </Grid>
+    </Border>
+</Window>
