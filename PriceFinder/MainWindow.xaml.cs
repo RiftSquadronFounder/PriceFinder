@@ -54,22 +54,23 @@ namespace PriceFinder
             stopwatch.Start();
             try
             {
+                TextLine111.Text = "";
                 List<ShopItem> items = new List<ShopItem>();
                 if (CurrentSortMethod == "bubble")
                 {
 
-                    TextLine111.Text = "Применен бульбулятор(пузырь); ";
+                    TextLine111.Text += "Применен бульбулятор(пузырь); ";
                     items = _customFileManager.BubbleSort(_customFileManager.Items);
                 }
                 else if (CurrentSortMethod == "two")
                 {
-                    TextLine111.Text = "Применен чет там, где два элемента переставляются, типа; ";
+                    TextLine111.Text += "Применен чет там, где два элемента переставляются, типа; ";
 
                     items = _customFileManager.TwoThingsSort(_customFileManager.Items);
                 }
                 else if (CurrentSortMethod == "swap")
                 {
-                    TextLine111.Text = "Применено \"перетаскивание\", но, по факту, бульбулятор(пузырь); ";
+                    TextLine111.Text += "Применено \"перетаскивание\", но, по факту, бульбулятор(пузырь); ";
 
                     items = _customFileManager.BubbleSort(_customFileManager.SwapSort(_customFileManager.Items));
                 }
@@ -86,12 +87,12 @@ namespace PriceFinder
                     {
                         ShopItemsListGUI.ItemsSource = items;
                     }
-                    TextLine111.Text = "Строка пуста; ";
+                    TextLine111.Text += "Строка пуста; ";
                 }
                 else
                 {
                     
-                    TextLine111.Text = "Произведен поиск; ";
+                    TextLine111.Text += "Произведен поиск; ";
                     if (CurrentMethod == "linear")
                     {
                         TextLine111.Text += "Линейно; ";
