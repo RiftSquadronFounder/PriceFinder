@@ -12,7 +12,7 @@ namespace PriceFinder
 
         public string Title { get; set; }
         public int Price { get; set; }
-        public ShopItem(string title = "blank", int price = 0)
+        public ShopItem(string title = "blank", int price = -1)
         {
             Title = title;
             Price = price;

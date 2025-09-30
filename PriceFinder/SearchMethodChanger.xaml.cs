@@ -33,9 +33,31 @@ namespace PriceFinder
             }
         }
 
+        public string NewSortMethod
+        {
+            get { 
+                if ((bool)NoneSortRadioButton.IsChecked)
+                {
+                    return "none";
+                }
+                else if ((bool)BubbleSortRadioButton.IsChecked)
+                {
+                    return "bubble";
+                }
+                else if ((bool)TwoElementsRadioButton.IsChecked)
+                {
+                    return "two";
+                }
+                else
+                {
+                    return "swap";
+                }
+            }
+        }
+
         public bool Change = false;
 
-        public SearchMethodChanger(string CurrentMethod)
+        public SearchMethodChanger(string CurrentMethod, string CurrentSortMethod = "none")
         {
             
             
@@ -49,6 +71,22 @@ namespace PriceFinder
             {
                 LinearRadioButton.IsChecked = true;
             }
+
+
+            if (CurrentSortMethod == "none") {
+                NoneSortRadioButton.IsChecked = true;
+            }
+            else if (CurrentSortMethod == "bubble") {
+                BubbleSortRadioButton.IsChecked = true;
+            }
+            else if (CurrentSortMethod == "two") {
+                TwoElementsRadioButton.IsChecked = true;
+            }
+            else
+            {
+                SwappingRadioButton.IsChecked = true;
+            }
+
         }
 
         private void Accept(object sender, RoutedEventArgs e)

@@ -15,11 +15,13 @@
             <ColumnDefinition Width="0.1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.15*"></RowDefinition>
-            <RowDefinition Height="0.15*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="0.15*"></RowDefinition>
-            <RowDefinition Height="0.15*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.3*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <TextBlock Text="Выберите способ поиска" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1"></TextBlock>
@@ -29,7 +31,16 @@
             <RadioButton GroupName="SearchType" Name="BinaryRadioButton" VerticalContentAlignment="Center" Content="Бинарный"></RadioButton>
         </ListBox>
 
-        <Button Content="Подтвердить" Grid.Row="3" Grid.Column="1" Click="Accept"></Button>
+        <TextBlock Text="Выберите способ сортировки по цене" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="3"></TextBlock>
+
+        <ListBox Grid.Row="4" Grid.Column="1">
+            <RadioButton GroupName="SortType" Name="NoneSortRadioButton" VerticalContentAlignment="Center" Content="Без сортировки"></RadioButton>
+            <RadioButton GroupName="SortType" Name="BubbleSortRadioButton" VerticalContentAlignment="Center" Content="Бульбуль"></RadioButton>
+            <RadioButton GroupName="SortType" Name="TwoElementsRadioButton" VerticalContentAlignment="Center" Content="Два типА"></RadioButton>
+            <RadioButton GroupName="SortType" Name="SwappingRadioButton" VerticalContentAlignment="Center" Content="Перестановка"></RadioButton>
+        </ListBox>
+
+        <Button Content="Подтвердить" Grid.Row="5" Grid.Column="1" Click="Accept"></Button>
         <Button Content="X" Background="PaleVioletRed" Margin="5" Name="CloseWindow" FontSize="5" Padding="-5" Click="CloseWindow_Click"></Button>
 
         </Grid>

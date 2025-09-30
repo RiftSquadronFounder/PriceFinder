@@ -19,6 +19,7 @@ namespace PriceFinder
     public partial class MainWindow : Window
     {
         public string CurrentMethod { get; set; } = "linear";
+        public string CurrentSortMethod { get; set; } = "none";
         public CustomFileManager _customFileManager { get; set; }
         public MainWindow()
         {
@@ -31,11 +32,12 @@ namespace PriceFinder
 
         private void ChangeSearchMethod(object sender, RoutedEventArgs e)
         {
-            SearchMethodChanger searchMethodChanger = new SearchMethodChanger(CurrentMethod);
+            SearchMethodChanger searchMethodChanger = new SearchMethodChanger(CurrentMethod, CurrentSortMethod);
             searchMethodChanger.ShowDialog();
             if (searchMethodChanger.Change)
             {
                 CurrentMethod = searchMethodChanger.NewMethod;
+                CurrentSortMethod = searchMethodChanger.NewSortMethod;
             }
         }
 
@@ -47,18 +49,42 @@ namespace PriceFinder
 
         private void ToFind(object sender, RoutedEventArgs e)
         {
+            _customFileManager.RewindCasted();
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             try
             {
+                List<ShopItem> items = new List<ShopItem>();
+                if (CurrentSortMethod == "bubble")
+                {
+                    items = _customFileManager.BubbleSort(_customFileManager.Items);
+                }
+                else if (CurrentSortMethod == "two")
+                {
+                    items = _customFileManager.TwoThingsSort(_customFileManager.Items);
+                }
+                else if (CurrentSortMethod == "swap")
+                {
+                    items = _customFileManager.BubbleSort(_customFileManager.SwapSort(_customFileManager.Items));
+                }
+
+
                 if (PromptGUI.Text == "")
                 {
-                    ShopItemsListGUI.ItemsSource = _customFileManager.Items;
+                    if(CurrentSortMethod == "none")
+                    {
+                        ShopItemsListGUI.ItemsSource = _customFileManager.Items;
+
+                    }
+                    else
+                    {
+                        ShopItemsListGUI.ItemsSource = items;
+                    }
                     TextLine111.Text = "Строка пуста; ";
                 }
                 else
                 {
-                    List<ShopItem> items = new List<ShopItem>();
+                    
                     TextLine111.Text = "Произведен поиск; ";
                     if (CurrentMethod == "linear")
                     {
@@ -89,14 +115,17 @@ namespace PriceFinder
                             TextLine111.Text += "Безрезультатно; ";
                         }
                         TextLine111.Text += "Бинарно; ";
-
                     }
+
+                    
+
+
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 stopwatch.Stop();
-                MessageBox.Show("Ашибке");
+                MessageBox.Show($"{ex.Message}");
             }
             finally { 
                 TextLine111.Text += $"Времени на поиск: {stopwatch.ElapsedMilliseconds} миллисекунд";
@@ -109,7 +138,22 @@ namespace PriceFinder
             ShopItemsListGUI.Items.Refresh();
             }
 
-      
-    
+        
+        private void PromptGUI_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (PromptGUI.Text != "")
+            {
+                SearchButtonGUI.Content = "Поиск";
+            }
+            else
+            {
+                SearchButtonGUI.Content = "Обновить";
+            }
+        }
+
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"Кол-во проверок: {_customFileManager.ChecksCasted}\nКол-во перемещений: {_customFileManager.SwapsCasted}\n\nДоп. - {TextLine111.Text}", "Справка");
+        }
     }
 }
