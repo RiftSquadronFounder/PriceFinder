@@ -57,14 +57,20 @@ namespace PriceFinder
                 List<ShopItem> items = new List<ShopItem>();
                 if (CurrentSortMethod == "bubble")
                 {
+
+                    TextLine111.Text = "Применен бульбулятор(пузырь); ";
                     items = _customFileManager.BubbleSort(_customFileManager.Items);
                 }
                 else if (CurrentSortMethod == "two")
                 {
+                    TextLine111.Text = "Применен чет там, где два элемента переставляются, типа; ";
+
                     items = _customFileManager.TwoThingsSort(_customFileManager.Items);
                 }
                 else if (CurrentSortMethod == "swap")
                 {
+                    TextLine111.Text = "Применено \"перетаскивание\", но, по факту, бульбулятор(пузырь); ";
+
                     items = _customFileManager.BubbleSort(_customFileManager.SwapSort(_customFileManager.Items));
                 }
 
@@ -128,7 +134,7 @@ namespace PriceFinder
                 MessageBox.Show($"{ex.Message}");
             }
             finally { 
-                TextLine111.Text += $"Времени на поиск: {stopwatch.ElapsedMilliseconds} миллисекунд";
+                TextLine111.Text += $"Времени на операцию: {stopwatch.ElapsedMilliseconds} миллисекунд";
                 stopwatch.Stop(); 
             }
 
